@@ -1,0 +1,33 @@
+<aside>
+  <img src="/images/sidebar_pic.jpg" class="sidebar-pic img-rounded col-offset-2">
+  <p>Hey, I'm Robert: father, mentor, and developer.</p>
+  <br>
+
+  <h4>Contact</h4>
+  <table class="table">
+    <tr> <td>Twitter:</td><td><a href="//twitter.com/rwjblue">rwjblue</a></td> </tr>
+    <tr> <td>GitHub:</td><td><a href="//github.com/rjackson">rjackson</a></td> </tr>
+    <tr> <td>Email:</td><td><a href="#">Contact</a></td> </tr>
+  </table>
+  <br>
+
+  <h4>Tags</h4>
+  <div class="list-group">
+    <% blog.tags.each do |tag, articles| %>
+      <a href="<%= tag_path(tag) %>" class="list-group-item">
+        <span class="badge"><%= articles.size %></span>
+        <%= tag %>
+      </a>
+    <% end %>
+  </div>
+
+  <h4>By Year</h4>
+  <div class="list-group">
+    <% blog.articles.group_by {|a| a.date.year }.each do |year, articles| %>
+      <a href="<%= blog_year_path(year) %>" class="list-group-item">
+        <span class="badge"><%= articles.size %></span>
+        <%= year %>
+      </a>
+    <% end %>
+  </div>
+</aside>

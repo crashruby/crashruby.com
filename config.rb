@@ -1,3 +1,6 @@
+require 'dotenv'
+Dotenv.load
+
 ###
 # Blog settings
 ###
@@ -7,9 +10,9 @@ Time.zone = "Eastern Time (US & Canada)"
 activate :blog do |blog|
   # blog.prefix = "blog"
   # blog.permalink = ":year/:month/:day/:title.html"
-  # blog.sources = ":year-:month-:day-:title.html"
+  blog.sources = "/articles/:year-:month-:day-:title.html"
   # blog.taglink = "tags/:tag.html"
-  # blog.layout = "layout"
+  blog.layout = "article_layout"
   # blog.summary_separator = /(READMORE)/
   # blog.summary_length = 250
   # blog.year_link = ":year.html"
@@ -25,12 +28,25 @@ activate :blog do |blog|
   # blog.page_link = "page/:num"
 end
 
+# Activate sync extension
+activate :sync do |sync|
+  sync.fog_provider = 'AWS'
+  sync.fog_directory = 'crashruby.com'
+  sync.fog_region = 'us-east-1'
+  sync.aws_access_key_id = ENV['AWS_ACCESS_KEY']
+  sync.aws_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
+  sync.existing_remote_files = 'delete'
+  sync.after_build = true
+end
+
 activate :livereload
 activate :asset_hash
 activate :minify_html
 activate :directory_indexes
 
+page "/*", :layout => "application"
 page "/feed.xml", :layout => false
+page "/articles/*", :layout => "article"
 
 ###
 # Markdown
@@ -45,45 +61,12 @@ set :markdown, :fenced_code_blocks => true, :smartypants => true
 
 activate :rouge_syntax
 
-###
-# Helpers
-###
-
-# Automatic image dimensions on image_tag helper
-# activate :automatic_image_sizes
-
-# Methods defined in the helpers block are available in templates
-# helpers do
-#   def some_helper
-#     "Helping"
-#   end
-# end
-
 set :css_dir, 'stylesheets'
-
 set :js_dir, 'javascripts'
-
 set :images_dir, 'images'
 
 # Build-specific configuration
 configure :build do
-  # For example, change the Compass output style for deployment
-  # activate :minify_css
-
-  # Minify Javascript on build
-  # activate :minify_javascript
-
-  # Enable cache buster
-  # activate :cache_buster
-
-  # Use relative URLs
-  # activate :relative_assets
-
-  # Compress PNGs after build
-  # First: gem install middleman-smusher
-  # require "middleman-smusher"
-  # activate :smusher
-
-  # Or use a different image path
-  # set :http_path, "/Content/images/"
+  activate :minify_css
+  activate :minify_javascript
 end
