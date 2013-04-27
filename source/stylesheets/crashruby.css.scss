@@ -27,6 +27,10 @@ h1,h2,h3,h4,h5,h6 {
   height: 200px;
 };
 
+@media screen and (max-width: 768px) {
+  .sidebar { display: none;}
+}
+
 /*****************/
 /* Sticky Footer */
 /*****************/
