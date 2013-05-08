@@ -2,7 +2,8 @@
 title: Using drip with JRuby
 author: Robert Jackson
 date: 2013-01-21
-tags: jruby
+published: true
+tags: jruby ruby
 ---
 [Drip](https://github.com/flatland/drip) is an awesome command line tool that can be used to dramatically lower perceived JVM startup time.  It does this by preloading an entirely new JVM process\instance and allowing you to simply use the preloaded environment.  This has extraordinary results with jruby.  
 
