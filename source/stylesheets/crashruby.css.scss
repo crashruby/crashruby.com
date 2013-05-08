@@ -5,6 +5,10 @@
 $header_text_font_family: "calluna", serif;
 $main_text_font_family: "calluna-sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
+
+/***********************/
+/* Font Size           */
+/***********************/
 html { font-size: 62.5%; }
 
 body {
@@ -21,6 +25,10 @@ h1 { font-size: 38px; font-size: 3.8rem;}
 h2 { font-size: 32px; font-size: 3.2rem;}
 h3 { font-size: 24px; font-size: 2.4rem;}
 
+
+/***********************/
+/* Image Size          */
+/***********************/
 .logo {
   height: 150px;
 }
