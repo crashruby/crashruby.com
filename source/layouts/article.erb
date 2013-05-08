@@ -1,6 +1,6 @@
 <% wrap_layout :application do %>
   <article>
-    <%= partial 'article_title', :locals => {article: current_page} %>
+    <h1><%= partial 'article_title', :locals => {article: current_page} %></h1>
     <%= yield %>
     <%= partial 'disqus', :locals => {page: current_page} %>
   </article>
