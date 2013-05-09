@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
 
-    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="/stylesheets/github.css" rel="stylesheet" media="screen">
-    <link href="/stylesheets/crashruby.css" rel="stylesheet" media="screen">
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/github.css" rel="stylesheet">
+    <link href="/stylesheets/crashruby.css" rel="stylesheet">
 
     <%= partial "google_analytics" %>
     <script type="text/javascript" src="//use.typekit.net/mcg6gsj.js"></script>
@@ -15,7 +15,7 @@
   </head>
   <body>
     <div id="wrap">
-      <header>
+      <header class="hidden-print">
         <div class="container">
           <a href="/"><img src="/images/logo.png" class="logo"></a>
           <span class="h2"><%= link_to "Articles", '/', :class => 'col-offset-1' %></span>
