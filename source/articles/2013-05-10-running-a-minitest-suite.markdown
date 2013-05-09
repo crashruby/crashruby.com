@@ -185,4 +185,4 @@ This solution is so simple that I had initially completely overlooked it!
 
 It was so easy to get caught up in the pageantry of the *on true way* to run the tests, but the reality is that all of these methods are perfectly valid (and likely many more).  Any of them could be perfect for a particular scenario.
 
-I truly enjoy working with Minitest after years with `rspec`. Please don't get me wrong, `rspec` is a great tool, but it is **very** refreshing to be able to read the entire source of your test framework in a short period of time (`minitest` is roughly 1/5 of the size of `rspec`).
+I truly enjoy working with Minitest after years with `rspec`. Please don't get me wrong, `rspec` is a great tool, but it is **very** refreshing to be able to read the entire source of your test framework in a short period of time (`minitest` is roughly 1/5 of the size of `rspec`; for details see [here](https://gist.github.com/5550653.git)).
