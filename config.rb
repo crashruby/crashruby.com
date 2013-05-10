@@ -35,7 +35,7 @@ activate :sync do |sync|
   sync.fog_region = 'us-east-1'
   sync.aws_access_key_id = ENV['AWS_ACCESS_KEY']
   sync.aws_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
-  sync.existing_remote_files = 'delete'
+  sync.existing_remote_files = 'keep'
   sync.gzip_compression = true
   # sync.after_build = true
 end
