@@ -2,7 +2,7 @@
 title: Running a Minitest Suite
 author: Robert Jackson
 date: 2013-05-10
-published: false
+published: true
 tags: minitest, testing, ruby
 ---
 
