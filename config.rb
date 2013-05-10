@@ -36,6 +36,7 @@ activate :sync do |sync|
   sync.aws_access_key_id = ENV['AWS_ACCESS_KEY']
   sync.aws_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
   sync.existing_remote_files = 'delete'
+  sync.gzip_compression = true
   sync.after_build = true
 end
 
@@ -43,6 +44,7 @@ activate :livereload
 activate :asset_hash
 activate :minify_html
 activate :directory_indexes
+activate :gzip
 
 page "/*", :layout => "application"
 page "/feed.xml", :layout => false
