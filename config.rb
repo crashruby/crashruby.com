@@ -37,7 +37,7 @@ activate :sync do |sync|
   sync.aws_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
   sync.existing_remote_files = 'keep'
   sync.gzip_compression = true
-  # sync.after_build = true
+  sync.after_build = true
 end
 
 activate :livereload
