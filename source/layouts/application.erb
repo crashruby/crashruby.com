@@ -9,6 +9,12 @@
     <link href="/stylesheets/github.css" rel="stylesheet">
     <link href="/stylesheets/crashruby.css" rel="stylesheet">
 
+    <% if content_for? :title %>
+      <%= yield_content :title %>
+    <% else %>
+      <title><%= current_page.data.title || 'CrashRuby Blog' %></title>
+    <% end %>
+
     <%= partial "google_analytics" %>
     <script type="text/javascript" src="//use.typekit.net/mcg6gsj.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
