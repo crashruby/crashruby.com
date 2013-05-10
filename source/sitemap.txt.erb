@@ -1,0 +1,4 @@
+<% root_url = data.site.url %>
+<% sitemap.resources.each do |page| %>
+  <%= "#{root_url}#{page.url}\n" if valid_sitemap_resource? page.url %>
+<% end %>

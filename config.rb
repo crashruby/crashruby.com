@@ -47,6 +47,8 @@ activate :directory_indexes
 page "/*", :layout => "application"
 page "/feed.xml", :layout => false
 page "/articles/*", :layout => "article"
+page "/sitemap.xml", :layout => false
+page "/sitemap.txt", :layout => false
 
 ###
 # Markdown
