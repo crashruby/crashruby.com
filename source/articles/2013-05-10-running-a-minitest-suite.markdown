@@ -8,8 +8,9 @@ tags: minitest, testing, ruby
 
 I have enjoyed using [Minitest](https://github.com/seattle.rb/minitest) on a new project, but have been struggling with how I should be kicking off my test suite.  This is a pretty simple thing in `rspec`, but wasn't obvious with Minitest. I have explored a few different methods and figured that I might as well document them.
 
-
 READMORE
+
+[*Update: 2013-05-11*](#update-2013-05-11)
 
 ## Requirements
 
@@ -169,7 +170,7 @@ After dealing with the `rake/testtask` backtrace for a while I started to think 
 Dir.glob('./spec/**/*_spec.rb').each { |file| require file}
 ```
 
-This solution is so simple that I had initially completely overlooked it! 
+This solution is so simple that I had initially completely overlooked it!
 
 ### Meets Requirements?
 
@@ -188,3 +189,27 @@ It was so easy to get caught up in the pageantry of the *one true way* to run th
 I have truly enjoyed working with Minitest after years with `rspec`. Please don't get me wrong, `rspec` is a great tool, but it is **very** refreshing to be able to read and understand the source of your test framework in a short period of time (`minitest` is roughly 1/5 of the size of `rspec`; for details see [here](https://gist.github.com/rjackson/5550653)).
 
 Keep an eye out for more articles as I continue to explore the world of `minitest`.
+
+## <a name="update-2013-05-11"></a> Update: 2013-05-11:
+
+Since a few people have asked about this I figured it may be useful to explain exactly how I am using the little script above.  I have embedded it into my `spec_helper.rb` inside an `if __FILE__ == $0` section.  That way if I execute the `spec_helper.rb` directly it will run the whole test suite, but I can still run individual test files (even though they require the `spec_helper.rb`).  So a basic `spec_helper.rb` would look like this:
+
+```ruby
+require 'minitest/autorun'
+
+if __FILE__ == $0
+  $LOAD_PATH.unshift('lib', 'spec')
+  Dir.glob('./spec/**/*_spec.rb') { |f| require f }
+end
+```
+
+So if I execute `ruby spec/spec_helper.rb` it will run the whole suite, but if I run something like `ruby spec/some_random_spec.rb` it will run just that one spec file.
+
+You could also do the same thing with a specific rake task (as mentioned in [one of the reddit comments](http://www.reddit.com/r/ruby/comments/1e2skd/running_a_minitest_suite/c9wbi5j)). This might look something like:
+
+```ruby
+task :test do
+  $LOAD_PATH.unshift('lib', 'spec')
+  Dir.glob('./spec/**/*_spec.rb') { |f| require f }
+end
+```
