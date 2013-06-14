@@ -66,12 +66,13 @@ git diff --name-only master -- spec test | egrep '_(spec|test).rb'
 
 ## Simplifying
 
-Once we include the whitelist based filtering option, and automatically excluded any new files from master our command is pretty difficult to remember and/or type. We need a way to simplify the command into something we can easily remember. Conveniently, `git` has a built-in way to handle this for us:: 
+Once we include the whitelist based filtering option, and automatically excluded any new files from master our command is pretty difficult to remember and/or type. We need a way to simplify the command into something we can easily remember. Conveniently, `git` has a built-in way to handle this for us: 
 
 ```sh
 git config --global alias.list-branch-tests "! git diff --diff-filter=ACMRTUXB --name-only master -- spec test | egrep '_(spec|test).rb' "
 ```
-Please note that the example given here will create a global `git` alias, but if you want specific aliases per project just exclude the `--global` flag.
+
+**Note:** The example given here will create a global `git` alias, but if you want specific aliases per project just exclude the `--global` flag.
 
 ## Running the Tests
 
