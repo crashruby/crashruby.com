@@ -2,7 +2,7 @@
 title: Running Changed Tests
 author: Robert Jackson
 date: 2013-06-13
-published: false
+published: true
 tags: minitest, rspec, testing, git
 ---
 
