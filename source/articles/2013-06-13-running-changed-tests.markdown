@@ -6,23 +6,23 @@ published: true
 tags: minitest, rspec, testing, git
 ---
 
-Using small feature branches is definitely the best way to go for local development with `git`. This makes it very easy to keep distinct features separate and merge them back to `master` when the feature is completed. One thing that would be nice would be if we could easily run only the new/changed tests from our feature branch. How can we leverage the awesomeness of `git` to run only the tests that have changed from one branch to another?
+Using small feature branches is the best way to go for local development with `git`. This makes it very easy to keep distinct features separate and merge them back to `master` when the feature is completed. It would be nice would be if we could easily run only the new/changed tests from our feature branch. How can we leverage the awesomeness of `git` to run only the tests that have changed from one branch to another?
 
 READMORE
 
 ## Basic Idea
 
-I rely on CI and pre-deployment checks to run the whole test suite prior to a production deployment. At any given time I want to be able to run the tests that have been added or changed since branching. A tool like `guard` can be setup to do exactly what I am proposing, but as stated in previous articles I prefer to run my tests from within `vim` using an easy to remember mapping (for me that is usually `<leader>t`). 
+I rely on CI and pre-deployment checks to run the whole test suite prior to a production deployment. At any given time I want to be able to run the tests that have been added or changed since branching. A tool like `guard` can be set up to do exactly what I am proposing, but as stated in previous articles I prefer to run my tests from within `vim` using an easy to remember mapping (for me that is usually `<leader>t`). 
 
 ## Get Changed Files
 
-If we want to only run the new/updated files between branches we are going to need a list of them. How can we make `git` do this for us? There are a few different ways to make `git` give us the information that we need, but the simplest way that I can think of is to use the `diff` subcommand ([see documentation](http://git-scm.com/docs/git-diff)) and specify that we only want the filenames.  Something like this should be a good start:
+If we want to only run the new/updated files between branches we are going to need a list of them. How can we make `git` do this for us? There are a few different ways to make `git` give us the information that we need, but the simplest way I can think of is to use the `diff` subcommand ([see documentation](http://git-scm.com/docs/git-diff)) and specify that we only want the filenames.  Something like this should be a good start:
 
 ```sh
 git diff --name-only
 ```
 
-With this command we are going to get a list of files with uncommitted changes, but what we want is a list of files changed between our working directory and another branch. It turns out it is **super** easy as `git diff` can take a branch name (or specific commit) as a parameter:
+With this command we are going to get a list of files with uncommitted changes, but what we want is a list of files changed between our working directory and another branch. It turns out it is **super** easy because `git diff` can take a branch name (or specific commit) as a parameter:
 
 ```sh
 git diff --name-only master
