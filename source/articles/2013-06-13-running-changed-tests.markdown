@@ -42,27 +42,21 @@ git diff --name-only master -- spec test
 
 Here are a few edge cases where this technique has caused issues for me:
 
-* When tests have been added to master but are not in the current branch they need to be excluded because `git` thinks these files are 'deleted'. The `--diff-filter` option tells `git` to ignore 'deleted' files:
-
-```sh
-git diff --diff-filter=ACMRTUXB --name-only master -- spec test
-```
-
-* When using any files that cannot be required or may cause errors when required incorrectly. (The biggest issue that I had in this category was with `factory_girl` since the factory files cannot be passed directly along with other test files that require them without getting an error for `Factory already registered:`). These types of errors can be fixed by filtering:
-
-** Filter out the offending files specifically (blacklist):
-
-```sh
-git diff --name-only master -- spec test | grep -v spec/factories
-```
-
-** Filter out everything **except** the files that we want (whitelist):
-
-```sh
-git diff --name-only master -- spec test | egrep '_(spec|test).rb'
-```
-
-* Any new files that are not added to `git` yet will not be run. In order for `git diff` to report a new file we need to add them to the index (usually via `git add`).
+<ul>
+  <li><p>When tests have been added to master but are not in the current branch they need to be excluded because `git` thinks these files are 'deleted'. The `--diff-filter` option tells `git` to ignore 'deleted' files:</p>
+    <pre class="highlight shell"> git diff --diff-filter=ACMRTUXB --name-only master -- spec test </pre>
+  </li>
+  <li><p>When using any files that cannot be required or may cause errors when required incorrectly. (The biggest issue that I had in this category was with `factory_girl` since the factory files cannot be passed directly along with other test files that require them without getting an error for `Factory already registered:`). These types of errors can be fixed by filtering:</p>
+<ul>
+  <li><p>Filter out the offending files specifically (blacklist):</p>
+    <pre class="highlight shell"> git diff --name-only master -- spec test | grep -v spec/factories</pre>
+  </li>
+  <li><p>Filter out everything **except** the files that we want (whitelist):</p>
+    <pre class="highlight shell"> git diff --name-only master -- spec test | egrep '_(spec|test).rb'</pre>
+  </li>
+</ul></li>
+<li><p>Any new files that are not added to `git` yet will not be run. In order for `git diff` to report a new file we need to add them to the index (usually via `git add`).</p></li>
+</ul>
 
 ## Simplifying
 
