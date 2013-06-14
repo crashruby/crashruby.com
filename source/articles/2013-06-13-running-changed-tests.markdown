@@ -48,20 +48,28 @@ Here are a few edge cases where this technique has caused issues for me:
 git diff --diff-filter=ACMRTUXB --name-only master -- spec test
 ```
 
-* When using `factory_girl` and files have been added to `spec/factories` the factory files cannot be passed directly along with other test files that require them without getting an error for `Factory already registered:`. This can be fixed by filtering out any files from `spec/factories` using `grep -v`:
+* When using any files that cannot be required or may cause errors when required incorrectly. (The biggest issue that I had in this category was with `factory_girl` since the factory files cannot be passed directly along with other test files that require them without getting an error for `Factory already registered:`). These types of errors can be fixed by filtering:
+
+** Filter out the offending files specifically (blacklist):
 
 ```sh
-git diff --diff-filter=ACMRTUXB --name-only master -- spec test | grep -v spec/factories
+git diff --name-only master -- spec test | grep -v spec/factories
+```
+
+** Filter out everything **except** the files that we want (whitelist):
+
+```sh
+git diff --name-only master -- spec test | egrep '_(spec|test).rb'
 ```
 
 * Any new files that are not added to `git` yet will not be run. In order for `git diff` to report a new file we need to add them to the index (usually via `git add`).
 
 ## Simplifying
 
-Obviously, the current version of our command is pretty difficult to remember and/or type so we need a way to simplify the command into something we can easily remember. We can leverage `git`'s aliases to handle this for us: 
+Once we include the whitelist based filtering option, and automatically excluded any new files from master our command is pretty difficult to remember and/or type. We need a way to simplify the command into something we can easily remember. Conveniently, `git` has a built-in way to handle this for us:: 
 
 ```sh
-git config --global alias.list-branch-tests "! git diff --diff-filter=ACMRTUXB --name-only master -- spec test | grep -v spec/factories "
+git config --global alias.list-branch-tests "! git diff --diff-filter=ACMRTUXB --name-only master -- spec test | egrep '_(spec|test).rb' "
 ```
 Please note that the example given here will create a global `git` alias, but if you want specific aliases per project just exclude the `--global` flag.
 
