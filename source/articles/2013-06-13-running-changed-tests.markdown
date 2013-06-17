@@ -6,13 +6,13 @@ published: true
 tags: minitest, rspec, testing, git
 ---
 
-Using small feature branches is the best way to go for local development with `git`. This makes it very easy to keep distinct features separate and merge them back to `master` when the feature is completed. It would be nice would be if we could easily run only the new/changed tests from our feature branch. How can we leverage the awesomeness of `git` to run only the tests that have changed from one branch to another?
+Using small feature branches is the best way to go for local development with `git`. This makes it very easy to keep distinct features separate and merge them back to `master` when the feature is completed. It would be nice if we could easily run only the new/changed tests from our feature branch. How can we leverage the awesomeness of `git` to run only the tests that have changed from one branch to another?
 
 READMORE
 
 ## Basic Idea
 
-I rely on CI and pre-deployment checks to run the whole test suite prior to a production deployment. At any given time I want to be able to run the tests that have been added or changed since branching. A tool like `guard` can be set up to do exactly what I am proposing, but as stated in previous articles I prefer to run my tests from within `vim` using an easy to remember mapping (for me that is usually `<leader>t`). 
+I rely on CI and pre-deployment checks to run the whole test suite prior to a production deployment. At any given time I want to be able to run the tests that I have added or changed since branching. A tool like `guard` can be set up to do exactly what I am proposing, but as stated in previous articles I prefer to run my tests from within `vim` using an easy to remember mapping (for me that is usually `<leader>t`). 
 
 ## Get Changed Files
 
